@@ -1,7 +1,7 @@
 #!/bin/sh
 
 usage() {
-	echo "usage: "
+	echo "usage: xbps-create.sh <target>"
 }
 
 if [ "$#" -ne 1 ]; then
@@ -10,11 +10,9 @@ if [ "$#" -ne 1 ]; then
 fi
 
 if [ ! -d "$1" ]; then
-	echo "expected dir"
+	echo "error: expected target directory"
 	exit 1
 fi
 
-cp -r "$1" ./xbps-install-dir/ 
 docker build -t xbps-pkg-build-img .
-docker run xbps-pkg-build-img
-rm -rf ./xbps-install-dir/
+docker run --rm -v $(pwd):/usr/src/xbps-package-build --env XBPS_BUILD_TARGET_DIR="$1"  xbps-pkg-build-img 
