@@ -1,7 +1,7 @@
 #!/bin/sh
 
 usage() {
-	echo "usage: xbps-create.sh <target>"
+	1>&2 echo "usage: xbps-create.sh <target>"
 }
 
 if [ "$#" -ne 1 ]; then
@@ -10,7 +10,7 @@ if [ "$#" -ne 1 ]; then
 fi
 
 if [ ! -d "$1" ]; then
-	echo "error: expected target directory"
+	1>&2 echo "error: expected target directory"
 	exit 1
 fi
 
