@@ -1,5 +1,11 @@
 #!/bin/sh
 
+# This script is executed internally from the docker container
+
+# Edit the options according to your needs.
+
+TARGET_DIR="$1"
+
 xbps-create \
 	--architecture noarch  \
 	--dependencies "buz>=1.0.0" \
@@ -10,4 +16,5 @@ xbps-create \
 	--long-desc "Foo foo bar bar" \
 	--desc "Foo bar" \
 	--compression=xz \
-	"$1"
+	"$TARGET_DIR"
+

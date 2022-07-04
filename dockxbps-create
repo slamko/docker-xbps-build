@@ -1,0 +1,30 @@
+#!/bin/sh
+
+DOCKERFILE_NAME="Dockerfile-dockxbps-create"
+INSTALL_DIR="."
+
+usage() {
+	1>&2 echo "usage: dockxbps-create <target> [install dir]"
+}
+
+if [ "$#" -ne 1 || "$1" = "-h" || "$1" = "--help" ]; then
+	usage
+	exit 1
+fi
+
+if [ ! -d "$1" ]; then
+	1>&2 echo "error: expected target directory"
+	exit 1
+fi
+
+if [ ! -z "$2" ]; then
+	INSTALL_DIR="$2"
+fi
+
+if [ ! -f "$INSTALL_DIR"/"$DOCKERFILE_NAME" ]; then
+	1>&2 echo "error: Could not find dockerfile. Invalid isntall dir."
+fi
+
+docker build -t xbps-pkg-build-img -f "$INSTALL_DIR"/"$DOCKERFILE_NAME" "$1"
+
+docker run --rm -v $(pwd):/usr/src/xbps-package-build/output --env XBPS_CREATE_EXEC="dockxbps-create-control"  xbps-pkg-build-img 
