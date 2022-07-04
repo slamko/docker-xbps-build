@@ -16,5 +16,5 @@ fi
 
 XBPS_CREATE_EXEC=xbps-create-control.sh
 
-docker build -t xbps-pkg-build-img -f ./Dockerfile  ..
-docker run --rm -v $(pwd):/usr/src/xbps-package-build/output --env XBPS_BUILD_TARGET_DIR="$1" --env XBPS_CREATE_EXEC="xbps-create-control.sh"  xbps-pkg-build-img 
+docker build -t xbps-pkg-build-img -f ./Dockerfile x"$1"
+docker run --rm -v $(pwd):/usr/src/xbps-package-build/output --env XBPS_CREATE_EXEC="xbps-create-control.sh"  xbps-pkg-build-img 

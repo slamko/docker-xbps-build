@@ -3,9 +3,9 @@
 xbps-create \
 	--architecture noarch  \
 	--dependencies "buz>=1.0.0" \
-	--homepage <https://github.com/user/repo> \
+	--homepage "<https://github.com/user/repo>" \
 	--license GPLv3 \
-	--maintainer John Smith \
+	--maintainer "John Smith" \
 	--pkgver "foo-1.0_1" \
 	--long-desc "Foo foo bar bar" \
 	--desc "Foo bar" \
